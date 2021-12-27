@@ -25,7 +25,7 @@ app.get("/api/:date?", function (req, res) {
   date = Number.isNaN(dateNumber) ? date : dateNumber;
   const convertedDate = new Date(date);
   if (Number.isNaN(convertedDate)) {
-    res.json({ error: "Invalid Date" });
+    res.send({ error: "Invalid Date" });
   } else {
     res.json({
       unix: convertedDate.getTime(),
