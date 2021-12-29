@@ -21,9 +21,15 @@ app.get("/", function (req, res) {
 // your API endpoints
 app.get("/api/:date?", function (req, res) {
   let { date } = req.params;
-  const dateNumber = Number(date);
-  date = Number.isNaN(dateNumber) ? date : dateNumber;
-  const convertedDate = new Date(date);
+  let convertedDate;
+  if (!date) {
+    convertedDate = new Date();
+  } else {
+    const dateNumber = Number(date);
+    date = Number.isNaN(dateNumber) ? date : dateNumber;
+    convertedDate = new Date(date);
+  }
+
   if (Number.isNaN(convertedDate)) {
     res.send({ error: "Invalid Date" });
   } else {
